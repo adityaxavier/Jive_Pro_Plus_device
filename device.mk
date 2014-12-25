@@ -124,17 +124,6 @@ PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
     wcnss_service
 
-# Sensors
-#PRODUCT_PACKAGES += \
-    sensors.msm8610 \
-    libcalmodule_akm \
-    calmodule.cfg
-
-
-# Update-Binary
-#PRODUCT_COPY_FILES += \
-    device/globalspace/jiveplus/update-binary:obj/EXECUTABLES/updater_intermediates/updater
-
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,device/globalspace/jiveplus/ramdisk,root)
@@ -186,8 +175,6 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 
 # Inhert dalvik heap values from aosp
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-
-#$(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
