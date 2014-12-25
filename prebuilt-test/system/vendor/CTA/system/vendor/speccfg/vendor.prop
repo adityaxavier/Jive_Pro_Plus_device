@@ -1,6 +1,0 @@
-#
-# ADDITIONAL_FEATURE_PROPERTIES FOR CTA SPEC
-#
-persist.sys.strict_op_enable=true
-
-persist.env.c.phone.matchnum=11
