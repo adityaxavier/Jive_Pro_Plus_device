@@ -141,6 +141,10 @@ on boot
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
+    #Torch
+    # Enable writing to brightness node under torch-light from userspace		
+    chown system system /sys/class/leds/torch-light/brightness	
+
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
