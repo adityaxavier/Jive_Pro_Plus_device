@@ -160,17 +160,6 @@ PRODUCT_COPY_FILES += \
     kernel/globalspace/kernel/drivers/staging/prima/firmware_bin/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
 
 
-#Telephony
-#PRODUCT_PROPERTY_OVERRIDES += \
-	telephony.lteOnGsmDevice=0 \
-	telephony.lteOnCdmaDevice=0 \
-	ro.telephony.default_network=3 \
-	persist.radio.no_wait_for_card=1 \
-	persist.radio.dfr_mode_set=1 \
-	persist.radio.dont_use_dsd=true \
-	persist.radio.multisim.config=dsds \
-	persist.multisim.config=dsds 
-
 $(call inherit-product, build/target/product/full_base_telephony.mk)
 
 # Inhert dalvik heap values from aosp
