@@ -36,8 +36,6 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 # Inline kernel building
 TARGET_KERNEL_SOURCE := kernel/globalspace/kernel
-#TARGET_KERNEL_SOURCE := kernel/globalspace/kitkat
-#TARGET_KERNEL_SOURCE := kernel/globalspace/testing
 TARGET_KERNEL_CONFIG := msm8610-jiveplus_defconfig
 BOARD_CUSTOM_BOOTIMG_MK := device/globalspace/jiveplus/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.oem.product=Jive_Pro user_debug=30 msm_rtb.filter=0x37
@@ -79,9 +77,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # Graphics
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-#TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf-legacy
-#TARGET_QCOM_DISPLAY_VARIANT := caf-new
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 
