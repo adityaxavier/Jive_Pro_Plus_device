@@ -55,7 +55,10 @@ on init
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard1 /mnt/internal_sd
     symlink /storage/sdcard1 /external_sd
-	
+
+
+on fs
+    mount_all fstab.qcom	
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
