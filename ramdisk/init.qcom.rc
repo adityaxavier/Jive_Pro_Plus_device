@@ -53,7 +53,7 @@ on init
 
     symlink /storage/sdcard0 /mnt/sdcard
     symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/internal_sd
+    symlink /storage/sdcard1 /mnt/internal_sd
     symlink /storage/sdcard1 /external_sd
 	
 
@@ -87,6 +87,9 @@ on boot
 
     #CMDLINE
     chown root radio /proc/cmdline
+
+    # Enable writing to brightness node under torch-light from userspace
+    chown system system /sys/class/leds/torch-light/brightness 
 
     # AK9863 Magnetometer
     chown compass compass /sys/class/compass/akm8963/enable_acc
@@ -382,8 +385,10 @@ service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     oneshot
 
 on property:vold.decrypt=trigger_restart_framework
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
     start qcom-c_main-sh
     start config_bluetooth
+
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
@@ -628,30 +633,6 @@ service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
 
-#start camera server as daemon
-service qcamerasvr /system/bin/mm-qcamera-daemon
-   class late_start
-   user camera
-   group camera system inet input graphics
-
-on property:init.svc.media=restarting
-    restart qcamerasvr
-on property:init.svc.servicemanager=restarting
-    restart qcamerasvr
-
-
-service ptt_socket_app /system/bin/ptt_socket_app -d
-    class main
-    user root
-    group root
-    oneshot
-
-service ptt_ffbm /system/bin/ptt_socket_app -f -d
-    user root
-    group root
-    disabled
-    oneshot
-
 service gpsone_daemon /system/bin/gpsone_daemon
     class late_start
     user gps
@@ -749,7 +730,7 @@ service atfwd /system/bin/ATFWD-daemon
     user system
     group system radio
 
-service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
+service hostapd /system/bin/hostapd -d /data/hostapd/hostapd.conf
     class late_start
     user root
     group root
@@ -816,12 +797,12 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
-#service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /storage/sdcard0
-#     class late_start
-#     disabled
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /storage/sdcard0
+     class late_start
+     disabled
 
-service sdcard /system/bin/sdcard /data/media /storage/sdcard0 1023 1023
-    class late_start
+#service sdcard /system/bin/sdcard /data/media /storage/sdcard0 1023 1023
+#    class late_start
 
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
      class late_start
@@ -847,24 +828,20 @@ service akmd /system/bin/akmd8963
     user root
     group compass misc input
 
-#service baseband /system/etc/init.gcom.ril.sh
-#    class main
-#    user root
-#    group root
-#    oneshot
-
 # Define fastmmi
 service fastmmi /system/bin/mmi
     user root
     group root
     disabled
-#    oneshot
 
 service fastmmisrv /system/bin/sh /init.qcom.factory.sh
     user root
     group root
     disabled
-#    oneshot
+    oneshot
+
+on ffbm
+    start fastmmisrv
 
 service hvdcp /system/bin/hvdcp
     class core

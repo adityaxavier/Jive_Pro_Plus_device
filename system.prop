@@ -18,7 +18,7 @@ persist.radio.atfwd.start=false
 persist.radio.multisim.config=dsds
 
 ro.telephony.default_cdma_sub=0
-ro.telephony.default_network=10,1
+ro.telephony.default_network=4,1
 ro.cdma.subscribe_on_ruim_ready=true
 telephony.lteOnCdmaDevice=1
 
@@ -58,7 +58,7 @@ mm.enable.qcom_parser=131071
 #
 # system prop to enable custom avsync behavior
 #
-#mm.enable.customavsync=1
+mm.enable.customavsync=1
 
 # system prop to check for MPEG4 DP HW support
 mm.mpeg4dp.hw.support=true
@@ -180,3 +180,11 @@ persist.radio.csvt.enabled=false
 persist.radio.custom_ecc=1
 persist.radio.rat_on=combine
 persist.radio.mt_sms_ack=20
+
+#camera
+persist.camera.tintless=enable
+
+ro.gps.agps_provider=1
+
+persist.radio.apm_sim_not_pwdn=0
+persist.radio.restore_mode_pref=0

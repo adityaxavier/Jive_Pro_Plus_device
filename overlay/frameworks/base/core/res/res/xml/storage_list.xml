@@ -36,12 +36,15 @@
 -->
 
 <StorageList xmlns:android="http://schemas.android.com/apk/res/android">
-     <storage android:mountPoint="/storage/sdcard1" 
+	<StorageList xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- removable is not set in nosdcard product -->
+    <storage android:mountPoint="/storage/sdcard1" 
     	android:storageDescription="@string/storage_sd_card" 
 	android:primary="false" 
 	android:removable="true" 
 	android:emulated="false" 
 	android:allowMassStorage="true" />
+
 
     <storage android:mountPoint="/storage/sdcard0" 
     	android:storageDescription="@string/storage_internal" 
@@ -50,8 +53,5 @@
 	android:emulated="false" 
 	android:allowMassStorage="true" />
 
-    <!-- external USB drive -->
-    <storage android:mountPoint="/storage/usbdisk"
-        android:storageDescription="@string/storage_usb"
-        android:removable="true" />
+</StorageList>
 </StorageList>
